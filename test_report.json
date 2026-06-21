@@ -1,0 +1,242 @@
+{
+  "summary": {
+    "total": 33,
+    "passed": 30,
+    "failed": 2,
+    "warnings": 1,
+    "pass_rate": "90.9%"
+  },
+  "details": [
+    {
+      "id": 1,
+      "name": "数据加载",
+      "status": "PASS",
+      "message": "成功加载单词数据",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 2,
+      "name": "模块数量",
+      "status": "PASS",
+      "message": "共 19 个模块，符合预期",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 3,
+      "name": "模块名称格式",
+      "status": "PASS",
+      "message": "所有模块名称格式正确",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 4,
+      "name": "单词总数",
+      "status": "PASS",
+      "message": "共 800 个单词",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 5,
+      "name": "多选功能",
+      "status": "PASS",
+      "message": "成功收集 3 个模块共 134 个单词",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 6,
+      "name": "顺序模式",
+      "status": "PASS",
+      "message": "单词按原始顺序排列",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 7,
+      "name": "随机模式",
+      "status": "PASS",
+      "message": "随机打乱功能正常",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 8,
+      "name": "模式切换",
+      "status": "PASS",
+      "message": "支持顺序/随机模式切换",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 9,
+      "name": "答案验证-正确",
+      "status": "PASS",
+      "message": "正确答案 'resume' 验证通过",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 10,
+      "name": "答案验证-错误",
+      "status": "PASS",
+      "message": "错误答案 'wronganswer' 被正确识别",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 11,
+      "name": "大小写不敏感",
+      "status": "PASS",
+      "message": "答案比较忽略大小写",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 12,
+      "name": "例句提示",
+      "status": "PASS",
+      "message": "提供例句: In the conversation, the applicant asked if she sh...",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 13,
+      "name": "Enter键提交",
+      "status": "PASS",
+      "message": "支持Enter键提交答案（前端功能）",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 14,
+      "name": "题目生成-原文匹配",
+      "status": "PASS",
+      "message": "句子中成功匹配目标单词",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 15,
+      "name": "题目生成-空格替换",
+      "status": "PASS",
+      "message": "成功将单词替换为下划线",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 16,
+      "name": "首字母提示",
+      "status": "FAIL",
+      "message": "首字母提示缺失",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 17,
+      "name": "填空答案验证-正确",
+      "status": "PASS",
+      "message": "正确答案通过验证",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 18,
+      "name": "填空答案验证-错误",
+      "status": "PASS",
+      "message": "错误答案被正确拒绝",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 19,
+      "name": "空格处理",
+      "status": "PASS",
+      "message": "答案前后空格被正确忽略",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 20,
+      "name": "交互流程-输入框",
+      "status": "PASS",
+      "message": "用户可在输入框中输入答案",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 21,
+      "name": "交互流程-检查按钮",
+      "status": "PASS",
+      "message": "检查答案按钮功能正常",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 22,
+      "name": "交互流程-下一个",
+      "status": "PASS",
+      "message": "可导航到下一个题目",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 23,
+      "name": "正确计数",
+      "status": "PASS",
+      "message": "正确计数: 7",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 24,
+      "name": "错误计数",
+      "status": "PASS",
+      "message": "错误计数: 3",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 25,
+      "name": "正确率计算",
+      "status": "PASS",
+      "message": "正确率: 70.0%",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 26,
+      "name": "进度百分比",
+      "status": "PASS",
+      "message": "进度: 5%",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 27,
+      "name": "统计显示-正确数",
+      "status": "PASS",
+      "message": "正确计数显示正常",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 28,
+      "name": "统计显示-错误数",
+      "status": "PASS",
+      "message": "错误计数显示正常",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 29,
+      "name": "统计显示-正确率",
+      "status": "PASS",
+      "message": "正确率显示正常",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 30,
+      "name": "统计显示-进度条",
+      "status": "PASS",
+      "message": "进度条显示正常",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 31,
+      "name": "字段验证-sentence",
+      "status": "FAIL",
+      "message": "模块 '2. 日常安排话题（40)' 中的单词缺少 sentence 字段",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 32,
+      "name": "单词唯一性",
+      "status": "WARN",
+      "message": "存在 32 个重复单词",
+      "timestamp": "2026-06-21 13:52:16"
+    },
+    {
+      "id": 33,
+      "name": "音标格式",
+      "status": "PASS",
+      "message": "音标格式符合预期",
+      "timestamp": "2026-06-21 13:52:16"
+    }
+  ]
+}
