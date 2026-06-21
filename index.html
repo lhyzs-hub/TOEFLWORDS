@@ -693,6 +693,178 @@
         .mode-tab:hover:not(.active) {
             color: var(--text-primary);
         }
+
+        /* Feature Buttons */
+        .feature-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .feature-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            background: var(--background);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-btn.primary {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(255, 107, 107, 0.1) 100%);
+        }
+
+        .feature-btn.primary:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 107, 107, 0.2) 100%);
+        }
+
+        .feature-btn.secondary {
+            border-color: var(--secondary);
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(78, 205, 196, 0.1) 100%);
+        }
+
+        .feature-btn.secondary:hover {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(78, 205, 196, 0.2) 100%);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Panel */
+        .results-panel {
+            display: none;
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .results-panel.active {
+            display: block;
+        }
+
+        .results-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .results-stat {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .results-stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .results-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .results-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .wrong-words-section {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .wrong-words-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .wrong-words-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background: var(--background);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .wrong-word-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s ease;
+        }
+
+        .wrong-word-item:last-child {
+            border-bottom: none;
+        }
+
+        .wrong-word-item:hover {
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .wrong-word {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .wrong-word-meaning {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .wrong-words-empty {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -719,8 +891,21 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 2rem;">
-                <button id="startBtn" class="btn-primary">开始学习</button>
+            <!-- Feature Selection -->
+            <div class="settings-section">
+                <h3 class="settings-title">功能选择</h3>
+                <div class="feature-buttons">
+                    <button id="startBtn" class="feature-btn primary">
+                        <span class="feature-icon">📝</span>
+                        <span class="feature-text">单词测试</span>
+                        <span class="feature-desc">根据释义填写单词</span>
+                    </button>
+                    <button id="fillBlankBtn" class="feature-btn secondary">
+                        <span class="feature-icon">✏️</span>
+                        <span class="feature-text">填空练习</span>
+                        <span class="feature-desc">根据首字母完成句子</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -818,6 +1003,42 @@
                 <button class="nav-btn" id="nextBtn">下一个 →</button>
             </div>
         </div>
+
+        <!-- Results Panel -->
+        <div id="resultsPanel" class="results-panel">
+            <div class="results-title">测试完成！</div>
+            <div class="results-stats">
+                <div class="results-stat">
+                    <div class="results-stat-value" id="resultTotal">0</div>
+                    <div class="results-stat-label">总单词数</div>
+                </div>
+                <div class="results-stat">
+                    <div class="results-stat-value" id="resultCorrect">0</div>
+                    <div class="results-stat-label">正确</div>
+                </div>
+                <div class="results-stat">
+                    <div class="results-stat-value" id="resultIncorrect">0</div>
+                    <div class="results-stat-label">错误</div>
+                </div>
+                <div class="results-stat">
+                    <div class="results-stat-value" id="resultAccuracy">0%</div>
+                    <div class="results-stat-label">正确率</div>
+                </div>
+            </div>
+            <div class="results-message" id="resultMessage"></div>
+            
+            <!-- Wrong Words List -->
+            <div class="wrong-words-section">
+                <div class="wrong-words-title">📖 错题本</div>
+                <div class="wrong-words-list" id="wrongWordsList"></div>
+            </div>
+
+            <div class="nav-buttons" style="margin-top: 2rem;">
+                <button id="backToSettingsBtn2" class="btn-secondary">返回首页</button>
+                <button id="retryBtn" class="btn-primary">重新测试</button>
+                <button id="practiceWrongBtn" class="btn-primary" style="display: none;">练习错题</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -830,6 +1051,9 @@
         let correctCount = 0;
         let incorrectCount = 0;
         let currentTab = 'learn';
+        let wrongWords = [];  // 错题本
+        let wrongWordsThisSession = [];  // 当前会话的错题
+        let isFillBlankMode = false;  // 是否为填空练习模式
 
         // Load words data
         async function loadWordsData() {
@@ -910,7 +1134,46 @@
             });
         });
 
-        // Start learning
+        // Load wrong words from localStorage
+        function loadWrongWords() {
+            const saved = localStorage.getItem('wrongWords');
+            if (saved) {
+                wrongWords = JSON.parse(saved);
+            } else {
+                wrongWords = [];
+            }
+        }
+
+        // Save wrong words to localStorage
+        function saveWrongWords() {
+            localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
+        }
+
+        // Add word to wrong words
+        function addToWrongWords(word) {
+            // Check if already exists
+            const exists = wrongWords.some(w => w.word.toLowerCase() === word.word.toLowerCase());
+            if (!exists) {
+                wrongWords.push(word);
+                saveWrongWords();
+            }
+        }
+
+        // Remove word from wrong words
+        function removeFromWrongWords(word) {
+            const index = wrongWords.findIndex(w => w.word.toLowerCase() === word.word.toLowerCase());
+            if (index > -1) {
+                wrongWords.splice(index, 1);
+                saveWrongWords();
+            }
+        }
+
+        // Check if word is in wrong words
+        function isWrongWord(word) {
+            return wrongWords.some(w => w.word.toLowerCase() === word.word.toLowerCase());
+        }
+
+        // Start learning (Word Test mode)
         document.getElementById('startBtn').addEventListener('click', () => {
             if (selectedModules.length === 0) {
                 alert('请至少选择一个模块');
@@ -931,10 +1194,68 @@
             currentIndex = 0;
             correctCount = 0;
             incorrectCount = 0;
+            wrongWordsThisSession = [];
+            isFillBlankMode = false;
 
-            // Show learning area
+            // Show learning area with test mode active
             document.getElementById('settingsPanel').style.display = 'none';
+            document.getElementById('resultsPanel').classList.remove('active');
             document.getElementById('learningArea').classList.add('active');
+            
+            // Switch to test tab
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.mode-tab[data-tab="test"]').classList.add('active');
+            currentTab = 'test';
+            
+            // Show/hide modes
+            document.getElementById('learnMode').style.display = 'none';
+            document.getElementById('testMode').style.display = 'block';
+            document.getElementById('fillBlankMode').style.display = 'none';
+            document.getElementById('learnNavButtons').style.display = 'none';
+
+            displayCurrentWord();
+            updateProgress();
+        });
+
+        // Start fill blank practice
+        document.getElementById('fillBlankBtn').addEventListener('click', () => {
+            if (selectedModules.length === 0) {
+                alert('请至少选择一个模块');
+                return;
+            }
+
+            // Collect words from selected modules
+            currentWords = [];
+            selectedModules.forEach(moduleName => {
+                currentWords = currentWords.concat(wordsData[moduleName]);
+            });
+
+            // Shuffle if random mode
+            if (currentMode === 'random') {
+                currentWords = shuffleArray(currentWords);
+            }
+
+            currentIndex = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            wrongWordsThisSession = [];
+            isFillBlankMode = true;
+
+            // Show learning area with fill blank mode active
+            document.getElementById('settingsPanel').style.display = 'none';
+            document.getElementById('resultsPanel').classList.remove('active');
+            document.getElementById('learningArea').classList.add('active');
+            
+            // Switch to fill blank tab
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.mode-tab[data-tab="fill-blank"]').classList.add('active');
+            currentTab = 'fill-blank';
+            
+            // Show/hide modes
+            document.getElementById('learnMode').style.display = 'none';
+            document.getElementById('testMode').style.display = 'none';
+            document.getElementById('fillBlankMode').style.display = 'block';
+            document.getElementById('learnNavButtons').style.display = 'none';
 
             displayCurrentWord();
             updateProgress();
@@ -1102,8 +1423,20 @@
         document.getElementById('testInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const input = e.target;
+                
+                // If input is already locked, navigate to next
+                if (input.disabled) {
+                    if (currentIndex < currentWords.length - 1) {
+                        currentIndex++;
+                        displayCurrentWord();
+                        updateProgress();
+                    }
+                    return;
+                }
+
                 const userAnswer = input.value.trim().toLowerCase();
                 const correctAnswer = currentWords[currentIndex].word.toLowerCase();
+                const currentWord = currentWords[currentIndex];
 
                 // Auto lock input after pressing Enter
                 input.disabled = true;
@@ -1113,25 +1446,45 @@
                     input.classList.remove('incorrect');
                     correctCount++;
                     
+                    // Remove from wrong words if it was there
+                    if (isWrongWord(currentWord)) {
+                        removeFromWrongWords(currentWord);
+                    }
+                    
+                    // Check if completed all words
+                    if (currentIndex === currentWords.length - 1) {
+                        setTimeout(() => {
+                            showResults();
+                        }, 1000);
+                        return;
+                    }
+                    
                     // Auto advance after 1 second
                     setTimeout(() => {
-                        if (currentIndex < currentWords.length - 1) {
-                            currentIndex++;
-                            displayCurrentWord();
-                            updateProgress();
-                        }
+                        currentIndex++;
+                        displayCurrentWord();
+                        updateProgress();
                     }, 1000);
                 } else {
                     input.classList.add('incorrect');
                     input.classList.remove('correct');
                     incorrectCount++;
                     
+                    // Add to wrong words
+                    addToWrongWords(currentWord);
+                    
+                    // Add to current session wrong words list
+                    const existsInSession = wrongWordsThisSession.some(w => w.word.toLowerCase() === currentWord.word.toLowerCase());
+                    if (!existsInSession) {
+                        wrongWordsThisSession.push(currentWord);
+                    }
+                    
                     // Show hint
-                    document.getElementById('hintText').textContent = currentWords[currentIndex].sentence;
+                    document.getElementById('hintText').textContent = currentWord.sentence;
                     document.getElementById('hintBox').classList.add('show');
                     
                     // Show correct answer
-                    input.value = currentWords[currentIndex].word;
+                    input.value = currentWord.word;
                     
                     // Shake animation
                     input.classList.add('shake');
@@ -1140,6 +1493,137 @@
                 
                 updateStats();
             }
+        });
+
+        // Show results panel
+        function showResults() {
+            // Hide learning area
+            document.getElementById('learningArea').classList.remove('active');
+            
+            // Show results panel
+            document.getElementById('resultsPanel').classList.add('active');
+            
+            // Calculate stats
+            const total = currentWords.length;
+            const accuracy = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+            
+            // Update results
+            document.getElementById('resultTotal').textContent = total;
+            document.getElementById('resultCorrect').textContent = correctCount;
+            document.getElementById('resultIncorrect').textContent = incorrectCount;
+            document.getElementById('resultAccuracy').textContent = `${accuracy}%`;
+            
+            // Show message based on accuracy
+            let message = '';
+            if (accuracy >= 90) {
+                message = '🎉 太棒了！你的词汇掌握程度非常高！';
+            } else if (accuracy >= 70) {
+                message = '👍 做得不错！继续加油，争取更高分数！';
+            } else if (accuracy >= 50) {
+                message = '💪 还需要多加练习，坚持就是胜利！';
+            } else {
+                message = '📚 建议回顾错题，加强记忆！';
+            }
+            document.getElementById('resultMessage').textContent = message;
+            
+            // Display wrong words
+            displayWrongWords();
+        }
+
+        // Display wrong words list
+        function displayWrongWords() {
+            const list = document.getElementById('wrongWordsList');
+            
+            if (wrongWords.length === 0) {
+                list.innerHTML = '<div class="wrong-words-empty">🎉 暂无错题，继续保持！</div>';
+                document.getElementById('practiceWrongBtn').style.display = 'none';
+                return;
+            }
+            
+            // Sort wrong words alphabetically
+            const sortedWrongWords = [...wrongWords].sort((a, b) => a.word.localeCompare(b.word));
+            
+            list.innerHTML = sortedWrongWords.map(word => `
+                <div class="wrong-word-item">
+                    <div>
+                        <div class="wrong-word">${word.word}</div>
+                        <div class="wrong-word-meaning">${word.meaning.split('\n')[0]}</div>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">${word.phonetic}</div>
+                </div>
+            `).join('');
+            
+            // Show/hide practice button
+            document.getElementById('practiceWrongBtn').style.display = wrongWordsThisSession.length > 0 ? 'block' : 'none';
+        }
+
+        // Practice wrong words
+        document.getElementById('practiceWrongBtn').addEventListener('click', () => {
+            if (wrongWordsThisSession.length === 0) return;
+            
+            // Use only wrong words from this session
+            currentWords = [...wrongWordsThisSession];
+            
+            // Shuffle if random mode
+            if (currentMode === 'random') {
+                currentWords = shuffleArray(currentWords);
+            }
+            
+            currentIndex = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            wrongWordsThisSession = [];
+            isFillBlankMode = false;
+            
+            // Show learning area
+            document.getElementById('resultsPanel').classList.remove('active');
+            document.getElementById('learningArea').classList.add('active');
+            
+            // Switch to test tab
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.mode-tab[data-tab="test"]').classList.add('active');
+            currentTab = 'test';
+            
+            document.getElementById('learnMode').style.display = 'none';
+            document.getElementById('testMode').style.display = 'block';
+            document.getElementById('fillBlankMode').style.display = 'none';
+            document.getElementById('learnNavButtons').style.display = 'none';
+            
+            displayCurrentWord();
+            updateProgress();
+        });
+
+        // Retry test
+        document.getElementById('retryBtn').addEventListener('click', () => {
+            // Re-run the same test
+            currentIndex = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            wrongWordsThisSession = [];
+            isFillBlankMode = false;
+            
+            // Show learning area
+            document.getElementById('resultsPanel').classList.remove('active');
+            document.getElementById('learningArea').classList.add('active');
+            
+            // Switch to test tab
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.mode-tab[data-tab="test"]').classList.add('active');
+            currentTab = 'test';
+            
+            document.getElementById('learnMode').style.display = 'none';
+            document.getElementById('testMode').style.display = 'block';
+            document.getElementById('fillBlankMode').style.display = 'none';
+            document.getElementById('learnNavButtons').style.display = 'none';
+            
+            displayCurrentWord();
+            updateProgress();
+        });
+
+        // Back to settings from results
+        document.getElementById('backToSettingsBtn2').addEventListener('click', () => {
+            document.getElementById('resultsPanel').classList.remove('active');
+            document.getElementById('settingsPanel').style.display = 'block';
         });
 
         // Update progress
@@ -1170,6 +1654,7 @@
         }
 
         // Initialize
+        loadWrongWords();
         loadWordsData();
     </script>
 </body>
