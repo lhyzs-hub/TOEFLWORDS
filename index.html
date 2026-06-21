@@ -1052,6 +1052,7 @@
         let incorrectCount = 0;
         let currentTab = 'learn';
         let wrongWords = [];  // 错题本
+        let answerSubmitted = false;  // Track if current answer has been submitted
         let wrongWordsThisSession = [];  // 当前会话的错题
         let isFillBlankMode = false;  // 是否为填空练习模式
 
@@ -1296,6 +1297,8 @@
             testInput.className = 'test-input';
             testInput.disabled = false;
             document.getElementById('hintBox').classList.remove('show');
+            // Reset answer submitted state
+            answerSubmitted = false;
             // Auto focus on input for keyboard-only operation
             setTimeout(() => {
                 testInput.focus();
@@ -1423,16 +1426,15 @@
             checkFillBlankAnswer(word.word);
         });
 
-        // Test mode input - use keydown instead of keypress because keydown works on disabled inputs
+        // Test mode input - use keydown instead of keypress
         document.getElementById('testInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission
+                
                 const input = e.target;
                 
-                // If input is already locked, navigate to next or show results
-                if (input.disabled) {
-                    // Prevent default to avoid form submission
-                    e.preventDefault();
-                    
+                // If answer has been submitted, navigate to next or show results
+                if (answerSubmitted) {
                     // If last word, show results
                     if (currentIndex === currentWords.length - 1) {
                         showResults();
@@ -1448,8 +1450,8 @@
                 const correctAnswer = currentWords[currentIndex].word.toLowerCase();
                 const currentWord = currentWords[currentIndex];
 
-                // Auto lock input after pressing Enter
-                input.disabled = true;
+                // Mark answer as submitted
+                answerSubmitted = true;
 
                 // 空输入判定为正确答案
                 if (userAnswer === correctAnswer || userAnswer === '') {
