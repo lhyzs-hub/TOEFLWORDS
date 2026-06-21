@@ -1464,21 +1464,8 @@
                     if (isWrongWord(currentWord)) {
                         removeFromWrongWords(currentWord);
                     }
-                    
-                    // Check if completed all words
-                    if (currentIndex === currentWords.length - 1) {
-                        setTimeout(() => {
-                            showResults();
-                        }, 1000);
-                        return;
-                    }
-                    
-                    // Auto advance after 1 second
-                    setTimeout(() => {
-                        currentIndex++;
-                        displayCurrentWord();
-                        updateProgress();
-                    }, 1000);
+                    // Wait for user to press Enter to continue
+                    // Navigation handled by the disabled input check above
                 } else {
                     input.classList.add('incorrect');
                     input.classList.remove('correct');
@@ -1503,6 +1490,8 @@
                     // Shake animation
                     input.classList.add('shake');
                     setTimeout(() => input.classList.remove('shake'), 300);
+                    // Wait for user to press Enter to continue
+                    // Navigation handled by the disabled input check above
                 }
                 
                 updateStats();
