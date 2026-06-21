@@ -1340,6 +1340,14 @@
                 </div>
             `;
             
+            // Auto focus on fill blank input for keyboard-only operation
+            setTimeout(() => {
+                const fillBlankInput = document.getElementById('fillBlankInput');
+                if (fillBlankInput) {
+                    fillBlankInput.focus();
+                }
+            }, 100);
+            
             // Add enter key listener - use keydown for better compatibility
             document.getElementById('fillBlankInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
