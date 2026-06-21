@@ -1450,6 +1450,10 @@
         });
 
         document.getElementById('checkFillBtn').addEventListener('click', () => {
+            // Prevent multiple submissions
+            if (fillBlankSubmitted) {
+                return;
+            }
             const word = currentWords[currentIndex];
             checkFillBlankAnswer(word.word);
         });
