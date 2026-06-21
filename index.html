@@ -1052,7 +1052,8 @@
         let incorrectCount = 0;
         let currentTab = 'learn';
         let wrongWords = [];  // 错题本
-        let answerSubmitted = false;  // Track if current answer has been submitted
+        let answerSubmitted = false;  // Track if current answer has been submitted (test mode)
+        let fillBlankSubmitted = false;  // Track if current answer has been submitted (fill blank mode)
         let wrongWordsThisSession = [];  // 当前会话的错题
         let isFillBlankMode = false;  // 是否为填空练习模式
 
@@ -1299,6 +1300,7 @@
             document.getElementById('hintBox').classList.remove('show');
             // Reset answer submitted state
             answerSubmitted = false;
+            fillBlankSubmitted = false;
             // Auto focus on input for keyboard-only operation
             setTimeout(() => {
                 testInput.focus();
@@ -1338,9 +1340,24 @@
                 </div>
             `;
             
-            // Add enter key listener
-            document.getElementById('fillBlankInput').addEventListener('keypress', (e) => {
+            // Add enter key listener - use keydown for better compatibility
+            document.getElementById('fillBlankInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
+                    e.preventDefault(); // Prevent form submission
+                    
+                    // If answer has been submitted, navigate to next
+                    if (fillBlankSubmitted) {
+                        if (currentIndex === currentWords.length - 1) {
+                            showResults();
+                        } else {
+                            currentIndex++;
+                            displayCurrentWord();
+                            updateProgress();
+                        }
+                        return;
+                    }
+                    
+                    // Submit answer
                     checkFillBlankAnswer(word.word);
                 }
             });
@@ -1351,6 +1368,9 @@
             const input = document.getElementById('fillBlankInput');
             const userAnswer = input.value.trim().toLowerCase();
             const correct = correctWord.toLowerCase();
+
+            // Mark as submitted
+            fillBlankSubmitted = true;
 
             if (userAnswer === correct) {
                 input.classList.add('correct');
