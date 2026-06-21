@@ -1427,20 +1427,6 @@
         document.getElementById('testInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const input = e.target;
-                
-                // If input is already locked, navigate to next or show results
-                if (input.disabled) {
-                    // If last word, show results
-                    if (currentIndex === currentWords.length - 1) {
-                        showResults();
-                    } else {
-                        currentIndex++;
-                        displayCurrentWord();
-                        updateProgress();
-                    }
-                    return;
-                }
-
                 const userAnswer = input.value.trim().toLowerCase();
                 const correctAnswer = currentWords[currentIndex].word.toLowerCase();
                 const currentWord = currentWords[currentIndex];
@@ -1464,8 +1450,6 @@
                     if (isWrongWord(currentWord)) {
                         removeFromWrongWords(currentWord);
                     }
-                    // Wait for user to press Enter to continue
-                    // Navigation handled by the disabled input check above
                 } else {
                     input.classList.add('incorrect');
                     input.classList.remove('correct');
@@ -1490,11 +1474,20 @@
                     // Shake animation
                     input.classList.add('shake');
                     setTimeout(() => input.classList.remove('shake'), 300);
-                    // Wait for user to press Enter to continue
-                    // Navigation handled by the disabled input check above
                 }
                 
                 updateStats();
+                
+                // Auto navigate to next after a short delay (allow user to see result)
+                setTimeout(() => {
+                    if (currentIndex === currentWords.length - 1) {
+                        showResults();
+                    } else {
+                        currentIndex++;
+                        displayCurrentWord();
+                        updateProgress();
+                    }
+                }, 800); // 800ms delay to let user see the feedback
             }
         });
 
