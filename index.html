@@ -992,7 +992,6 @@
                 </div>
                 <div class="nav-buttons">
                     <button class="nav-btn" id="prevFillBtn" disabled>← 上一个</button>
-                    <button class="nav-btn" id="checkFillBtn">检查答案</button>
                     <button class="nav-btn" id="nextFillBtn">下一个 →</button>
                 </div>
             </div>
@@ -1447,15 +1446,6 @@
                 displayCurrentWord();
                 updateProgress();
             }
-        });
-
-        document.getElementById('checkFillBtn').addEventListener('click', () => {
-            // Prevent multiple submissions
-            if (fillBlankSubmitted) {
-                return;
-            }
-            const word = currentWords[currentIndex];
-            checkFillBlankAnswer(word.word);
         });
 
         // Test mode input - use keydown instead of keypress
