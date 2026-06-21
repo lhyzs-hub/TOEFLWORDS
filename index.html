@@ -1423,13 +1423,16 @@
             checkFillBlankAnswer(word.word);
         });
 
-        // Test mode input
-        document.getElementById('testInput').addEventListener('keypress', (e) => {
+        // Test mode input - use keydown instead of keypress because keydown works on disabled inputs
+        document.getElementById('testInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const input = e.target;
                 
                 // If input is already locked, navigate to next or show results
                 if (input.disabled) {
+                    // Prevent default to avoid form submission
+                    e.preventDefault();
+                    
                     // If last word, show results
                     if (currentIndex === currentWords.length - 1) {
                         showResults();
