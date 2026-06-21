@@ -417,10 +417,23 @@
             margin-bottom: 0.5rem;
         }
 
-        .test-phonetic {
-            font-size: 1.1rem;
+        .test-meaning {
+            font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .test-meaning-chinese {
+            display: block;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .test-meaning-english {
+            display: block;
+            font-style: italic;
         }
 
         .test-input-container {
@@ -773,7 +786,7 @@
             <!-- Test Mode -->
             <div id="testMode" class="test-container" style="display: none;">
                 <div class="test-word" id="testWord">word</div>
-                <div class="test-phonetic" id="testPhonetic">/fəˈnetɪk/</div>
+                <div class="test-meaning" id="testMeaning">中文释义</div>
                 <div class="test-input-container">
                     <input type="text" class="test-input" id="testInput" placeholder="输入单词后按 Enter 提交" autocomplete="off">
                 </div>
@@ -835,7 +848,14 @@
             const moduleGrid = document.getElementById('moduleGrid');
             moduleGrid.innerHTML = '';
 
-            Object.keys(wordsData).forEach(moduleName => {
+            // Sort modules by number in name
+            const sortedModules = Object.keys(wordsData).sort((a, b) => {
+                const numA = parseInt(a.match(/^\d+/)[0]);
+                const numB = parseInt(b.match(/^\d+/)[0]);
+                return numA - numB;
+            });
+
+            sortedModules.forEach(moduleName => {
                 const wordCount = wordsData[moduleName].length;
                 const card = document.createElement('div');
                 card.className = 'module-card';
@@ -940,8 +960,16 @@
             document.getElementById('wordCard').classList.remove('flipped');
 
             // Test mode
-            document.getElementById('testWord').textContent = word.meaning.split('\n')[0];
-            document.getElementById('testPhonetic').textContent = word.phonetic;
+            // Split meaning into chinese and english parts
+            const meanings = word.meaning.split('\n');
+            const chineseMeaning = meanings[0] || '';
+            const englishMeaning = meanings[1] || '';
+            
+            document.getElementById('testWord').textContent = chineseMeaning;
+            document.getElementById('testMeaning').innerHTML = `
+                <span class="test-meaning-chinese">${chineseMeaning}</span>
+                <span class="test-meaning-english">${englishMeaning || 'English: ' + word.word}</span>
+            `;
             const testInput = document.getElementById('testInput');
             testInput.value = '';
             testInput.className = 'test-input';
@@ -1077,11 +1105,13 @@
                 const userAnswer = input.value.trim().toLowerCase();
                 const correctAnswer = currentWords[currentIndex].word.toLowerCase();
 
+                // Auto lock input after pressing Enter
+                input.disabled = true;
+
                 if (userAnswer === correctAnswer) {
                     input.classList.add('correct');
                     input.classList.remove('incorrect');
                     correctCount++;
-                    input.disabled = true;
                     
                     // Auto advance after 1 second
                     setTimeout(() => {
@@ -1099,6 +1129,9 @@
                     // Show hint
                     document.getElementById('hintText').textContent = currentWords[currentIndex].sentence;
                     document.getElementById('hintBox').classList.add('show');
+                    
+                    // Show correct answer
+                    input.value = currentWords[currentIndex].word;
                     
                     // Shake animation
                     input.classList.add('shake');
