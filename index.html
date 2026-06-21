@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>托福听力核心词汇学习</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-light: #FF8E8E;
+            --primary-dark: #E55555;
+            --secondary: #4ECDC4;
+            --secondary-light: #7EDDD6;
+            --secondary-dark: #3DBDB5;
+            --accent: #FFE66D;
+            --background: #F7F9FC;
+            --surface: #FFFFFF;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --border: #E8ECF0;
+            --success: #6BCF7F;
+            --error: #FF6B6B;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #F7F9FC 0%, #E8F4F8 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .settings-section {
+            margin-bottom: 2rem;
+        }
+
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .settings-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .settings-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
+        }
+
+        /* Module Selection */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .module-card {
+            background: var(--background);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .module-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .module-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+        }
+
+        .module-card.selected::before {
+            opacity: 0.05;
+        }
+
+        .module-card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .module-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .module-count {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Mode Selection */
+        .mode-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 1rem 2rem;
+            background: var(--background);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .mode-btn:hover {
+            border-color: var(--secondary);
+            background: rgba(78, 205, 196, 0.05);
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        /* Learning Area */
+        .learning-area {
+            display: none;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .learning-area.active {
+            display: block;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .progress-stats {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Word Card */
+        .word-card-container {
+            perspective: 1000px;
+            margin-bottom: 2rem;
+        }
+
+        .word-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .word-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .word-card-front, .word-card-back {
+            width: 100%;
+            text-align: center;
+        }
+
+        .word-card-back {
+            display: none;
+        }
+
+        .word-card.flipped .word-card-front {
+            display: none;
+        }
+
+        .word-card.flipped .word-card-back {
+            display: block;
+            transform: rotateY(180deg);
+        }
+
+        .word-display {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .phonetic-display {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .meaning-display {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .sentence-display {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(78, 205, 196, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Test Mode */
+        .test-container {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .test-word {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .test-phonetic {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .test-input-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .test-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans SC', sans-serif;
+            text-align: center;
+        }
+
+        .test-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1);
+        }
+
+        .test-input.correct {
+            border-color: var(--success);
+            background: rgba(107, 207, 127, 0.05);
+        }
+
+        .test-input.incorrect {
+            border-color: var(--error);
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .hint-box {
+            background: linear-gradient(135deg, rgba(255, 230, 109, 0.2) 0%, rgba(255, 230, 109, 0.1) 100%);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .hint-box.show {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .hint-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hint-text {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Fill in the Blank */
+        .fill-blank-container {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .fill-blank-question {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .fill-blank-input {
+            display: inline-block;
+            width: 150px;
+            padding: 0.5rem 1rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            margin: 0 0.5rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            text-align: center;
+        }
+
+        .fill-blank-input:focus {
+            border-color: var(--secondary);
+        }
+
+        .fill-blank-input.correct {
+            border-color: var(--success);
+            background: rgba(107, 207, 127, 0.1);
+        }
+
+        .fill-blank-input.incorrect {
+            border-color: var(--error);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .first-letter-hint {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .nav-btn {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Stats */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mode-buttons {
+                flex-direction: column;
+            }
+
+            .word-display {
+                font-size: 2rem;
+            }
+
+            .test-word {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease-in-out;
+        }
+
+        /* Mode Tabs */
+        .mode-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--background);
+            padding: 0.5rem;
+            border-radius: 12px;
+        }
+
+        .mode-tab {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .mode-tab.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            box-shadow: var(--shadow);
+        }
+
+        .mode-tab:hover:not(.active) {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>托福听力核心词汇学习</h1>
+            <p class="subtitle">掌握核心词汇，提升听力理解能力</p>
+        </header>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel">
+            <div class="settings-section">
+                <h3 class="settings-title">模块选择</h3>
+                <div id="moduleGrid" class="module-grid">
+                    <!-- Modules will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">学习模式</h3>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="sequential">顺序学习</button>
+                    <button class="mode-btn" data-mode="random">随机乱序</button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="startBtn" class="btn-primary">开始学习</button>
+            </div>
+        </div>
+
+        <!-- Learning Area -->
+        <div id="learningArea" class="learning-area">
+            <!-- Progress -->
+            <div class="progress-container">
+                <div class="progress-header">
+                    <div>
+                        <div class="progress-text" id="progressText">0%</div>
+                        <div class="progress-stats" id="progressStats">已完成 0 / 0 个单词</div>
+                    </div>
+                    <button id="backToSettingsBtn" class="btn-secondary">返回设置</button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Mode Tabs -->
+            <div class="mode-tabs">
+                <button class="mode-tab active" data-tab="learn">单词学习</button>
+                <button class="mode-tab" data-tab="test">单词测试</button>
+                <button class="mode-tab" data-tab="fill-blank">填空练习</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="correctCount">0</div>
+                    <div class="stat-label">正确</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="incorrectCount">0</div>
+                    <div class="stat-label">错误</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="accuracyRate">0%</div>
+                    <div class="stat-label">正确率</div>
+                </div>
+            </div>
+
+            <!-- Learn Mode -->
+            <div id="learnMode" class="word-card-container">
+                <div class="word-card" id="wordCard">
+                    <div class="word-card-front">
+                        <div class="word-display" id="wordDisplay">word</div>
+                        <div class="phonetic-display" id="phoneticDisplay">/fəˈnetɪk/</div>
+                        <button class="btn-secondary" id="showMeaningBtn">显示释义</button>
+                    </div>
+                    <div class="word-card-back">
+                        <div class="meaning-display" id="meaningDisplay">
+                            n. 单词<br>
+                            英文: a single unit of language
+                        </div>
+                        <div class="sentence-display" id="sentenceDisplay">
+                            例句: This is an example sentence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Mode -->
+            <div id="testMode" class="test-container" style="display: none;">
+                <div class="test-word" id="testWord">word</div>
+                <div class="test-phonetic" id="testPhonetic">/fəˈnetɪk/</div>
+                <div class="test-input-container">
+                    <input type="text" class="test-input" id="testInput" placeholder="输入单词后按 Enter 提交" autocomplete="off">
+                </div>
+                <div class="hint-box" id="hintBox">
+                    <div class="hint-title">提示 - 例句：</div>
+                    <div class="hint-text" id="hintText"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prevTestBtn" disabled>← 上一个</button>
+                    <button class="nav-btn" id="nextTestBtn">下一个 →</button>
+                </div>
+            </div>
+
+            <!-- Fill Blank Mode -->
+            <div id="fillBlankMode" class="fill-blank-container" style="display: none;">
+                <div class="fill-blank-question" id="fillBlankQuestion">
+                    <!-- Question will be inserted here -->
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prevFillBtn" disabled>← 上一个</button>
+                    <button class="nav-btn" id="checkFillBtn">检查答案</button>
+                    <button class="nav-btn" id="nextFillBtn">下一个 →</button>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-buttons" id="learnNavButtons">
+                <button class="nav-btn" id="prevBtn" disabled>← 上一个</button>
+                <button class="nav-btn" id="nextBtn">下一个 →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let wordsData = {};
+        let selectedModules = [];
+        let currentMode = 'sequential';
+        let currentWords = [];
+        let currentIndex = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let currentTab = 'learn';
+
+        // Load words data
+        async function loadWordsData() {
+            try {
+                const response = await fetch('words_data.json');
+                wordsData = await response.json();
+                renderModules();
+            } catch (error) {
+                console.error('Error loading words data:', error);
+                alert('加载单词数据失败，请刷新页面重试');
+            }
+        }
+
+        // Render module selection
+        function renderModules() {
+            const moduleGrid = document.getElementById('moduleGrid');
+            moduleGrid.innerHTML = '';
+
+            Object.keys(wordsData).forEach(moduleName => {
+                const wordCount = wordsData[moduleName].length;
+                const card = document.createElement('div');
+                card.className = 'module-card';
+                card.innerHTML = `
+                    <div class="module-card-content">
+                        <span class="module-name">${moduleName}</span>
+                        <span class="module-count">${wordCount} 词</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => toggleModule(card, moduleName));
+                moduleGrid.appendChild(card);
+            });
+        }
+
+        // Toggle module selection
+        function toggleModule(card, moduleName) {
+            card.classList.toggle('selected');
+            const index = selectedModules.indexOf(moduleName);
+            if (index > -1) {
+                selectedModules.splice(index, 1);
+            } else {
+                selectedModules.push(moduleName);
+            }
+        }
+
+        // Mode selection
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+            });
+        });
+
+        // Tab switching
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentTab = tab.dataset.tab;
+                
+                // Show/hide modes
+                document.getElementById('learnMode').style.display = currentTab === 'learn' ? 'block' : 'none';
+                document.getElementById('testMode').style.display = currentTab === 'test' ? 'block' : 'none';
+                document.getElementById('fillBlankMode').style.display = currentTab === 'fill-blank' ? 'block' : 'none';
+                document.getElementById('learnNavButtons').style.display = currentTab === 'learn' ? 'flex' : 'none';
+                
+                // Reset current word display
+                if (currentWords.length > 0) {
+                    displayCurrentWord();
+                }
+            });
+        });
+
+        // Start learning
+        document.getElementById('startBtn').addEventListener('click', () => {
+            if (selectedModules.length === 0) {
+                alert('请至少选择一个模块');
+                return;
+            }
+
+            // Collect words from selected modules
+            currentWords = [];
+            selectedModules.forEach(moduleName => {
+                currentWords = currentWords.concat(wordsData[moduleName]);
+            });
+
+            // Shuffle if random mode
+            if (currentMode === 'random') {
+                currentWords = shuffleArray(currentWords);
+            }
+
+            currentIndex = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+
+            // Show learning area
+            document.getElementById('settingsPanel').style.display = 'none';
+            document.getElementById('learningArea').classList.add('active');
+
+            displayCurrentWord();
+            updateProgress();
+        });
+
+        // Back to settings
+        document.getElementById('backToSettingsBtn').addEventListener('click', () => {
+            document.getElementById('settingsPanel').style.display = 'block';
+            document.getElementById('learningArea').classList.remove('active');
+        });
+
+        // Display current word
+        function displayCurrentWord() {
+            if (currentWords.length === 0) return;
+
+            const word = currentWords[currentIndex];
+            
+            // Learn mode
+            document.getElementById('wordDisplay').textContent = word.word;
+            document.getElementById('phoneticDisplay').textContent = word.phonetic;
+            document.getElementById('meaningDisplay').innerHTML = word.meaning.replace(/\n/g, '<br>');
+            document.getElementById('sentenceDisplay').textContent = `例句: ${word.sentence}`;
+            document.getElementById('wordCard').classList.remove('flipped');
+
+            // Test mode
+            document.getElementById('testWord').textContent = word.meaning.split('\n')[0];
+            document.getElementById('testPhonetic').textContent = word.phonetic;
+            const testInput = document.getElementById('testInput');
+            testInput.value = '';
+            testInput.className = 'test-input';
+            testInput.disabled = false;
+            document.getElementById('hintBox').classList.remove('show');
+
+            // Fill blank mode
+            generateFillBlankQuestion(word);
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === currentWords.length - 1;
+            document.getElementById('prevTestBtn').disabled = currentIndex === 0;
+            document.getElementById('nextTestBtn').disabled = currentIndex === currentWords.length - 1;
+            document.getElementById('prevFillBtn').disabled = currentIndex === 0;
+            document.getElementById('nextFillBtn').disabled = currentIndex === currentWords.length - 1;
+        }
+
+        // Generate fill blank question
+        function generateFillBlankQuestion(word) {
+            const sentence = word.sentence;
+            const wordToFind = word.word;
+            
+            // Create question with blank
+            let question = sentence.replace(new RegExp(wordToFind, 'gi'), '______');
+            
+            // Add first letter hint
+            const firstLetter = wordToFind.charAt(0).toUpperCase();
+            question = question.replace('______', `<span class="first-letter-hint">${firstLetter}</span>______`);
+            
+            document.getElementById('fillBlankQuestion').innerHTML = `
+                <div style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    填写正确的单词（首字母提示：<span class="first-letter-hint">${firstLetter}</span>）
+                </div>
+                <div>${question}</div>
+                <div style="margin-top: 1.5rem;">
+                    <input type="text" class="fill-blank-input" id="fillBlankInput" autocomplete="off">
+                </div>
+            `;
+            
+            // Add enter key listener
+            document.getElementById('fillBlankInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkFillBlankAnswer(word.word);
+                }
+            });
+        }
+
+        // Check fill blank answer
+        function checkFillBlankAnswer(correctWord) {
+            const input = document.getElementById('fillBlankInput');
+            const userAnswer = input.value.trim().toLowerCase();
+            const correct = correctWord.toLowerCase();
+
+            if (userAnswer === correct) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+                correctCount++;
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+                incorrectCount++;
+                // Show correct answer
+                input.value = correctWord;
+            }
+            
+            updateStats();
+        }
+
+        // Show meaning button
+        document.getElementById('showMeaningBtn').addEventListener('click', () => {
+            document.getElementById('wordCard').classList.add('flipped');
+        });
+
+        // Navigation
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayCurrentWord();
+                updateProgress();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentIndex < currentWords.length - 1) {
+                currentIndex++;
+                displayCurrentWord();
+                updateProgress();
+            }
+        });
+
+        document.getElementById('prevTestBtn').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayCurrentWord();
+                updateProgress();
+            }
+        });
+
+        document.getElementById('nextTestBtn').addEventListener('click', () => {
+            if (currentIndex < currentWords.length - 1) {
+                currentIndex++;
+                displayCurrentWord();
+                updateProgress();
+            }
+        });
+
+        document.getElementById('prevFillBtn').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayCurrentWord();
+                updateProgress();
+            }
+        });
+
+        document.getElementById('nextFillBtn').addEventListener('click', () => {
+            if (currentIndex < currentWords.length - 1) {
+                currentIndex++;
+                displayCurrentWord();
+                updateProgress();
+            }
+        });
+
+        document.getElementById('checkFillBtn').addEventListener('click', () => {
+            const word = currentWords[currentIndex];
+            checkFillBlankAnswer(word.word);
+        });
+
+        // Test mode input
+        document.getElementById('testInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const input = e.target;
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = currentWords[currentIndex].word.toLowerCase();
+
+                if (userAnswer === correctAnswer) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                    correctCount++;
+                    input.disabled = true;
+                    
+                    // Auto advance after 1 second
+                    setTimeout(() => {
+                        if (currentIndex < currentWords.length - 1) {
+                            currentIndex++;
+                            displayCurrentWord();
+                            updateProgress();
+                        }
+                    }, 1000);
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                    incorrectCount++;
+                    
+                    // Show hint
+                    document.getElementById('hintText').textContent = currentWords[currentIndex].sentence;
+                    document.getElementById('hintBox').classList.add('show');
+                    
+                    // Shake animation
+                    input.classList.add('shake');
+                    setTimeout(() => input.classList.remove('shake'), 300);
+                }
+                
+                updateStats();
+            }
+        });
+
+        // Update progress
+        function updateProgress() {
+            const percentage = Math.round((currentIndex / currentWords.length) * 100);
+            document.getElementById('progressText').textContent = `${percentage}%`;
+            document.getElementById('progressStats').textContent = `已完成 ${currentIndex} / ${currentWords.length} 个单词`;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            const total = correctCount + incorrectCount;
+            const accuracy = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+            document.getElementById('accuracyRate').textContent = `${accuracy}%`;
+        }
+
+        // Shuffle array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Initialize
+        loadWordsData();
+    </script>
+</body>
+</html>
