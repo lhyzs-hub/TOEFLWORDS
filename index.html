@@ -1296,6 +1296,10 @@
             testInput.className = 'test-input';
             testInput.disabled = false;
             document.getElementById('hintBox').classList.remove('show');
+            // Auto focus on input for keyboard-only operation
+            setTimeout(() => {
+                testInput.focus();
+            }, 100);
 
             // Fill blank mode
             generateFillBlankQuestion(word);
@@ -1424,9 +1428,12 @@
             if (e.key === 'Enter') {
                 const input = e.target;
                 
-                // If input is already locked, navigate to next
+                // If input is already locked, navigate to next or show results
                 if (input.disabled) {
-                    if (currentIndex < currentWords.length - 1) {
+                    // If last word, show results
+                    if (currentIndex === currentWords.length - 1) {
+                        showResults();
+                    } else {
                         currentIndex++;
                         displayCurrentWord();
                         updateProgress();
@@ -1441,9 +1448,16 @@
                 // Auto lock input after pressing Enter
                 input.disabled = true;
 
-                if (userAnswer === correctAnswer) {
+                // 空输入判定为正确答案
+                if (userAnswer === correctAnswer || userAnswer === '') {
                     input.classList.add('correct');
                     input.classList.remove('incorrect');
+                    
+                    // 空输入时显示正确答案
+                    if (userAnswer === '') {
+                        input.value = currentWord.word;
+                    }
+                    
                     correctCount++;
                     
                     // Remove from wrong words if it was there
